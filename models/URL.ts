@@ -3,11 +3,20 @@ import shortid from "shortid";
 
 const schema = mongoose.Schema;
 
-const urlSchema = new Schema({
-  shortId: {
+interface urlAttrs {
+  shortUrl: string;
+  url: string;
+}
+
+interface urlDoc extends mongoose.Document {
+  shortUrl: string;
+  url: string;
+}
+
+const urlSchema = new schema({
+  shortUrl: {
     type: String,
     required: true,
-    default: shortid.generate(),
   },
   url: {
     type: String,
@@ -15,4 +24,6 @@ const urlSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("url", urlSchema);
+const URL = mongoose.model<urlDoc>("URL", urlSchema);
+
+export { URL };
