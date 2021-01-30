@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import shortid from "shortid";
 import { URL } from "../models/URL";
 import validator from "validator";
