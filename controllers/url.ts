@@ -29,14 +29,14 @@ export const AddUrl = async (
     return res.status(404).send({ msg: "Url not provided" });
   }
 
-  // const result = validator.isURL(url, {
-  //   require_protocol: true,
-  // });
+  const result = validator.isURL(url, {
+    require_protocol: true,
+  });
 
-  // if (!result) {
-  //   console.log(result);
-  //   return res.status(400).send({ msg: "invalid url" });
-  // }
+  if (!result) {
+    console.log(result);
+    return res.status(400).send({ msg: "invalid url" });
+  }
 
   try {
     const Url = await URL.findOne({ url });
