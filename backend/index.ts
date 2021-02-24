@@ -1,7 +1,7 @@
 import express from 'express';
 import { urlRouter } from './routes/url';
 import mongoose from 'mongoose';
-import { env } from './env';
+import { env } from './env/env';
 
 const app = express();
 
