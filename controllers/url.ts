@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from "express";
-import shortid from "shortid";
-import { URL } from "../models/URL";
-import validator from "validator";
+import { Request, Response, NextFunction } from 'express';
+import shortid from 'shortid';
+import { URL } from '../models/URL';
+import validator from 'validator';
 
 export const Redirect = async (
   req: Request,
@@ -13,11 +13,21 @@ export const Redirect = async (
   const Url = await URL.findOne({ shortUrl });
 
   if (!Url) {
-    return res.send({ msg: "Invalid shortUrl" });
+    return res.send({ msg: 'Invalid shortUrl' });
   }
 
   return res.redirect(Url.url);
 };
+
+export const LandPage = (req: Request, res: Response, next: NextFunction) => {
+  res.setHeader('Content-type', 'text/html');
+  res.write('<html>');
+  res.write('<head><title>Landing page</title></head>');
+  res.write('<body><h1>Enter the shortUrl in the url</h1></body>');
+  res.write('</html>');
+  res.end();
+};
+
 export const AddUrl = async (
   req: Request,
   res: Response,
@@ -26,7 +36,12 @@ export const AddUrl = async (
   const { url } = req.body;
 
   if (!url) {
-    return res.status(404).send({ msg: "Url not provided" });
+    res.setHeader('Content-type', 'text/html');
+    res.write('<html>');
+    res.write('<head><title>Landing page</title></head>');
+    res.write('<body><h1>Enter the shortUrl in the url</h1></body>');
+    res.write('</html>');
+    res.end();
   }
 
   const result = validator.isURL(url, {
@@ -35,7 +50,7 @@ export const AddUrl = async (
 
   if (!result) {
     console.log(result);
-    return res.status(400).send({ msg: "invalid url" });
+    return res.status(400).send({ msg: 'invalid url' });
   }
 
   try {
@@ -50,6 +65,6 @@ export const AddUrl = async (
     return res.status(200).send({ shorturl: Url.shortUrl, url });
   } catch (err) {
     console.log(err);
-    return res.status(500).send({ msg: "Unknown error" });
+    return res.status(500).send({ msg: 'Unknown error' });
   }
 };
