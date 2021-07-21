@@ -36,12 +36,7 @@ export const AddUrl = async (
   const { url } = req.body;
 
   if (!url) {
-    res.setHeader('Content-type', 'text/html');
-    res.write('<html>');
-    res.write('<head><title>Landing page</title></head>');
-    res.write('<body><h1>Enter the shortUrl in the url</h1></body>');
-    res.write('</html>');
-    res.end();
+    return res.status(404).send({ msg: 'Url not provided' });
   }
 
   const result = validator.isURL(url, {
