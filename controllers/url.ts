@@ -23,7 +23,9 @@ export const LandPage = (req: Request, res: Response, next: NextFunction) => {
   res.setHeader('Content-type', 'text/html');
   res.write('<html>');
   res.write('<head><title>Landing page</title></head>');
-  res.write('<body><h1>Enter the shortUrl in the url</h1></body>');
+  res.write(
+    '<body><h1>Frontend not yet ready, but you can add rJ5v_z8c7 in the url and it will redirect to my portfolio website.</h1></body>'
+  );
   res.write('</html>');
   res.end();
 };
