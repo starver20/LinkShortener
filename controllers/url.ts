@@ -20,6 +20,7 @@ export const Redirect = async (
 };
 
 export const LandPage = (req: Request, res: Response, next: NextFunction) => {
+  console.log('Here');
   res.setHeader('Content-type', 'text/html');
   res.write('<html>');
   res.write('<head><title>Landing page</title></head>');
@@ -57,6 +58,7 @@ export const AddUrl = async (
       const shortUrl = shortid.generate();
       let newUrl = new URL({ shortUrl, url });
       await newUrl.save();
+      // return res.json({ shorturl: newUrl.shortUrl, url });
       return res.status(201).send({ shorturl: newUrl.shortUrl, url });
     }
     return res.status(200).send({ shorturl: Url.shortUrl, url });
